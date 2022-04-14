@@ -1,0 +1,107 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: DynamicMultiprotocolLight_Github
+label: DynamicMultiprotocolLight_Github
+description: |-
+  This is a sample application demonstrating a light application using dynamic
+  multiprotocol (Zigbee + Bluetooth LE) and NVM3 for persistent storage.
+category: Zigbee Application
+package: Zigbee
+quality: production
+readme:
+- {path: readme.html}
+source:
+- {path: main.c}
+- {path: app.c}
+tag: ['hardware:has:lcd', prebuilt_demo, 'hardware:!shared:button:led', 'hardware:device:flash:512',
+  'hardware:device:ram:64']
+sdk: {id: gecko_sdk, version: 4.0.2}
+toolchain_settings: []
+component:
+- instance: [btn0, btn1]
+  id: simple_button
+- {id: bluetooth_feature_sm}
+- {id: zigbee_security_link_keys}
+- {id: zigbee_application_bootloader}
+- {id: zigbee_binding_table}
+- {id: zigbee_scenes}
+- {id: zigbee_display}
+- {id: bluetooth_stack}
+- {id: zigbee_debug_basic}
+- {id: zigbee_ble_event_handler}
+- {id: zigbee_identify}
+- {id: zigbee_basic}
+- {id: zigbee_zll_on_off_server}
+- {id: zigbee_green_power_client}
+- {id: bluetooth_feature_connection}
+- {id: brd4001a}
+- {id: zigbee_scan_dispatch}
+- {id: zigbee_zll_commissioning_server}
+- {id: bluetooth_feature_system}
+- {id: zigbee_zll}
+- {id: bluetooth_feature_scanner}
+- {id: zigbee_pro_stack}
+- {id: zigbee_network_creator}
+- {id: zigbee_zll_commissioning_common}
+- {id: zigbee_on_off}
+- {id: zigbee_debug_print}
+- {id: zigbee_reporting}
+- {id: zigbee_ble_dmp_cli}
+- {id: zigbee_install_code}
+- {id: zigbee_multi_network_stub}
+- instance: [example]
+  id: cli
+- {id: bluetooth_feature_gatt_server}
+- {id: zigbee_network_creator_security}
+- {id: bluetooth_feature_legacy_advertiser}
+- {id: EFR32MG12P332F1024GL125}
+- {id: gatt_configuration}
+- {id: zigbee_gp}
+- instance: [led0, led1]
+  id: simple_led
+- {id: zigbee_zcl_framework_core}
+- {id: zigbee_concentrator}
+- {id: bluetooth_feature_gatt}
+- {id: zigbee_find_and_bind_target}
+- {id: zigbee_zll_scenes_server}
+- {id: zigbee_counters}
+- {id: zigbee_zll_identify_server}
+- {id: zigbee_green_power_common}
+- {id: zigbee_zll_utility_server}
+- {id: brd4162a}
+- instance: [vcom]
+  id: iostream_usart
+- {id: zigbee_interpan}
+- {id: zigbee_form_and_join}
+- {id: zigbee_source_route}
+- {id: zigbee_packet_validate}
+- {id: zigbee_groups_server}
+- {id: zigbee_address_table}
+define:
+- {name: OS_CFG_COMPAT_INIT}
+config_file:
+- {path: config/zcl/zcl_config.zap, directory: zcl}
+configuration:
+- {name: SL_BOARD_ENABLE_VCOM, value: '1'}
+- {name: SL_IOSTREAM_USART_VCOM_FLOW_CONTROL_TYPE, value: usartHwFlowControlCtsAndRts}
+- {name: SL_CLI_MAX_INPUT_ARGUMENTS, value: '16'}
+- {name: SLI_ZIGBEE_PRIMARY_NETWORK_DEVICE_TYPE, value: SLI_ZIGBEE_NETWORK_DEVICE_TYPE_COORDINATOR_OR_ROUTER}
+- {name: SLI_ZIGBEE_PRIMARY_NETWORK_SECURITY_TYPE, value: SLI_ZIGBEE_NETWORK_SECURITY_TYPE_3_0}
+- {name: SL_IOSTREAM_USART_VCOM_RESTRICT_ENERGY_MODE_TO_ALLOW_RECEPTION, value: '1'}
+- {name: SL_CLI_PROMPT_STRING, value: '"DMPLight>"'}
+- {name: SL_BT_CONFIG_USER_ADVERTISERS, value: '3'}
+- {name: SL_BT_CONFIG_MAX_CONNECTIONS, value: '4'}
+- {name: SL_HEAP_SIZE, value: '16384'}
+- {name: SL_STACK_SIZE, value: '512'}
+- {name: LIB_MEM_CFG_HEAP_SIZE, value: '0'}
+- {name: SL_CLI_HELP_DESCRIPTION_ENABLED, value: '0'}
+- condition: [device_series_1]
+  name: NVM3_DEFAULT_NVM_SIZE
+  value: '36864'
+- condition: [device_series_2]
+  name: NVM3_DEFAULT_NVM_SIZE
+  value: '32768'
+ui_hints:
+  highlight:
+  - {path: null, focus: true}
+  - {path: readme.html}
+
